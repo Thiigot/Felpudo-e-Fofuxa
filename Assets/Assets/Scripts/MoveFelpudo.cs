@@ -1,18 +1,22 @@
 ﻿using UnityEngine;
-
+using System.Collections;
+using System;
 public class PlayerMovement : MonoBehaviour
 {
     [Header("Movimentação")]
     [SerializeField] private float speed = 5f;
     [SerializeField] private float jumpForce = 12f;
 
-
-    private Rigidbody2D rb;
     [Header("Colisão")]
     private bool isGrounded;
-    [SerializeField] private GameOverManager gameOverManager;
+    private bool hasWon = false;
+    [SerializeField] private CollisionParticles collisionParticles;
+    [SerializeField] private GameManager gameManager;
+
+    private Rigidbody2D rb;
 
 
+    #region MOVE AND JUMP
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -45,26 +49,77 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = false;
     }
+    #endregion
 
+    #region COLLISIONS
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag("Ground"))
+        Vector2 point = collision.contacts[0].point;
+        HandleCollision(collision.gameObject, point);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Vector2 point = other.ClosestPoint(transform.position);
+        HandleCollision(other.gameObject, point);
+    }
+
+    private void HandleCollision(GameObject obj, Vector2 point)
+    {
+        if (obj.CompareTag("Ground"))
         {
             isGrounded = true;
         }
-        if (collision.gameObject.CompareTag("Rock"))
+        else if (obj.CompareTag("Finish"))
         {
-            gameOverManager.GameOver();
+            speed = 3.5f;
         }
-        if (collision.gameObject.CompareTag("Box"))
+        else if (obj.CompareTag("Rock"))
         {
-            gameOverManager.GameOver();
-        }
-        if (collision.gameObject.CompareTag("Fruit"))
-        {
-            gameOverManager.AddPoint();
+            if (collisionParticles != null)
+                collisionParticles.PlayParticles("Rock", point);
 
-            Destroy(collision.gameObject);
+            if (gameManager != null)
+                gameManager.GameOver();
+        }
+        else if (obj.CompareTag("Box"))
+        {
+            if (collisionParticles != null)
+                collisionParticles.PlayParticles("Box", point);
+
+            if (gameManager != null)
+                gameManager.GameOver();
+        }
+        else if (obj.CompareTag("Fruit"))
+        {
+            if (collisionParticles != null)
+                collisionParticles.PlayParticles("Fruit", point);
+
+            if (gameManager != null)
+                gameManager.AddPoint();
+
+            Destroy(obj);
+        }
+        else if (obj.CompareTag("Love"))
+        {
+            if (hasWon)
+                return;
+            hasWon = true;
+
+            speed = 0;
+                
+            if (collisionParticles != null)
+                collisionParticles.PlayParticles("Love", point);
+            //gameManager.WinGame();
+            StartCoroutine(VictorySequence());
         }
     }
+    private IEnumerator VictorySequence()
+    {
+        yield return new WaitForSeconds(1f);
+
+        if (gameManager != null)
+            gameManager.WinGame();
+    }
+    #endregion
 }

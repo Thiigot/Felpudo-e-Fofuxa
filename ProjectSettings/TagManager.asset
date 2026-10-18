@@ -8,6 +8,7 @@ TagManager:
   - Box
   - Rock
   - Fruit
+  - Love
   layers:
   - Default
   - TransparentFX

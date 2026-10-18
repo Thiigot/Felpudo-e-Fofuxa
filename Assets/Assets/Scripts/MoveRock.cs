@@ -11,7 +11,7 @@ public class MoveRock : MonoBehaviour
     }
     void FixedUpdate()
     {
-        // Movimento automático para a direita
+        // Movimento automático para a esquerda
         rb.linearVelocity = new Vector2(
             -speed,
             rb.linearVelocity.y
