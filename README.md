@@ -17,6 +17,8 @@ Felpudo e Fofuxa é um miniprojeto desenvolvido com Unity e C#, tem como objetiv
 | Pular | Space |
 | Pausar | Esc |
 
+![GameOver](Assets/Assets/Documentation/GameOver.gif)
+
 Os scripts no projeto são:
 - CameraFollow.cs para fundo e camera acompanharem player.
 - CollisionParticles.cs para gerenciar as diferentes partículas.
@@ -25,7 +27,7 @@ Os scripts no projeto são:
 - MoveRock.cs para movimentação das pedras e frutas.
 
 
-![GameOver](Assets/Assets/Documentation/GameOver.gif)
+![Win](Assets/Assets/Documentation/YouWin.gif)
 
 ## Autores
 
