@@ -3,7 +3,7 @@
 >  Os alunos de jogos digitais, Brenda Santos Pinheiro e Thiago Lopes da UNEB, se propuseram a fazer um minigame para a disciplina de Programação de Jogos.
 Vídeo de [Demostração do jogo.](https://youtu.be/devNPyezhdg)
 
-![Gameplay](Assets/Assets/Documentation/Gameplay_PIC.jpg)
+![Win](Assets/Assets/Documentation/YouWin.gif)
 
 ## Resumo
 Felpudo e Fofuxa é um miniprojeto desenvolvido com Unity e C#, tem como objetivo praticar Unity 2D e efeito de partículas. Neste jogo, você controla o Felpudo, com o objetivo de desviar dos obstáculos e resgatar a Fofuxa!  
@@ -17,8 +17,6 @@ Felpudo e Fofuxa é um miniprojeto desenvolvido com Unity e C#, tem como objetiv
 | Pular | Space |
 | Pausar | Esc |
 
-![GameOver](Assets/Assets/Documentation/GameOver.gif)
-
 Os scripts no projeto são:
 - CameraFollow.cs para fundo e camera acompanharem player.
 - CollisionParticles.cs para gerenciar as diferentes partículas.
@@ -26,8 +24,7 @@ Os scripts no projeto são:
 - MoveFelpudo.cs para movimentação e controle do jogador.
 - MoveRock.cs para movimentação das pedras e frutas.
 
-
-![Win](Assets/Assets/Documentation/YouWin.gif)
+![GameOver](Assets/Assets/Documentation/GameOver.gif)
 
 ## Autores
 
